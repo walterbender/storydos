@@ -123,7 +123,7 @@ class StoryActivity(activity.Activity):
         self._grid = Gtk.Grid()
         self._grid.set_border_width(style.DEFAULT_PADDING)
         self._grid.attach(self._entry, 0, 0, 1, 1)
-        self._entry.show()
+        # self._entry.show()
 
         self._evbox = Gtk.EventBox()
         self._evbox.add(self._grid)
@@ -132,7 +132,7 @@ class StoryActivity(activity.Activity):
         self._evbox.connect('focus-out-event', self._text_focus_out_cb)
 
         self._scrolled_window = Gtk.ScrolledWindow()
-        self._scrolled_window.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
+        # self._scrolled_window.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
         self._scrolled_window.set_size_request(
             Gdk.Screen.width() - 6 * style.GRID_CELL_SIZE,
             style.GRID_CELL_SIZE * 3)
@@ -146,7 +146,7 @@ class StoryActivity(activity.Activity):
         vadj = self._scrolled_window.get_vadjustment()
         vadj.connect('changed', self._scroll_changed_cb)
         self._scrolled_window.add_with_viewport(self._evbox)
-        self._evbox.show()
+        # self._evbox.show()
 
         if self.tablet_mode:
             self._fixed.put(self._scrolled_window, 3 * style.GRID_CELL_SIZE,

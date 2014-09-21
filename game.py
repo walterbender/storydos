@@ -28,11 +28,13 @@ _logger = logging.getLogger('story-activity')
 from sugar3.graphics import style
 
 USE_ART4APPS = False
+'''
 try:
     from art4apps import Art4Apps
     USE_ART4APPS = True
 except ImportError:
     pass
+'''
 
 from sprites import Sprites, Sprite
 from utils import speak
@@ -90,7 +92,7 @@ class Game():
         self._timeout_id = None
 
         # Find the image files
-        self._PATHS = glob.glob(os.path.join(self._path, 'images', '*.svg'))
+        self._PATHS = glob.glob(os.path.join(self._path, 'images', '*.png'))
 
         # Generate the sprites we'll need...
         self._sprites = Sprites(self._canvas)
@@ -218,7 +220,8 @@ class Game():
 
         self._speak = Sprite(self._sprites, right, y2,
                             self._speak_pixbufs[SPEAK_OFF])
-        self._speak.set_layer(1)
+        # self._speak.set_layer(1)
+        self._speak.set_layer(-3)
         self._speak.type = 'speak-inactive'
 
         self._next_prev_pixbufs = []
@@ -308,7 +311,8 @@ class Game():
         else:
             self._speak.set_image(self._speak_pixbufs[SPEAK_OFF])
             self._speak.type = 'speak-inactive'
-        self._speak.set_layer(1)
+        # self._speak.set_layer(1)
+        self._speak.set_layer(-3)
 
     def set_record_icon_state(self, state):
         if state:
@@ -730,6 +734,7 @@ class Game():
                     pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
                         self._art4apps.get_image_filename(word), size, size)
             else:
+                '''
                 # Set SVG color
                 color = COLORS[int(uniform(0, 6))]
                 fd = open(os.path.join(self._path, self._PATHS[image]), 'r')
@@ -738,6 +743,9 @@ class Game():
                     svg_string += line.replace('#000000', color)
                 fd.close()
                 pixbuf = svg_str_to_pixbuf(svg_string, w=size, h=size)
+                '''
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+                    os.path.join(self._path, self._PATHS[image]), size, size)
 
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32,
                                      self._svg_width, self._svg_height)
