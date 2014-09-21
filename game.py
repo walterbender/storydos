@@ -179,14 +179,14 @@ class Game():
             self._record_pixbufs.append(
                 GdkPixbuf.Pixbuf.new_from_file_at_size(
                     os.path.join(self._root, 'icons', icon + '.svg'),
-                    style.GRID_CELL_SIZE, style.GRID_CELL_SIZE))
+                    2 * style.GRID_CELL_SIZE, 2 * style.GRID_CELL_SIZE))
 
         self._play_pixbufs = []
         for icon in ['play-inactive', 'play']:
             self._play_pixbufs.append(
                 GdkPixbuf.Pixbuf.new_from_file_at_size(
                     os.path.join(self._root, 'icons', icon + '.svg'),
-                    style.GRID_CELL_SIZE, style.GRID_CELL_SIZE))
+                    2 *  style.GRID_CELL_SIZE, 2 * style.GRID_CELL_SIZE))
 
         self._speak_pixbufs = []
         for icon in ['speak-inactive', 'speak']:
@@ -208,12 +208,16 @@ class Game():
             y2 += dy
         y3 = int((Gdk.Screen.height() - 2 * style.GRID_CELL_SIZE) / 2)
 
-        self._record = Sprite(self._sprites, right, y0,
+        self._record = Sprite(self._sprites,
+                              right - style.GRID_CELL_SIZE,
+                              y0 - style.GRID_CELL_SIZE,
                               self._record_pixbufs[RECORD_OFF])
         self._record.set_layer(1)
         self._record.type = 'record'
 
-        self._play = Sprite(self._sprites, right, y1,
+        self._play = Sprite(self._sprites,
+                              right - style.GRID_CELL_SIZE,
+                              y1,
                             self._play_pixbufs[PLAY_OFF])
         self._play.set_layer(1)
         self._play.type = 'play-inactive'
@@ -275,9 +279,10 @@ class Game():
             y1 += dy
             y2 += dy
         y3 = int((Gdk.Screen.height() - 2 * style.GRID_CELL_SIZE) / 2)
-        self._record.move((right, y0))
-        self._play.move((right, y1))
-        self._speak.move((right, y2))
+        self._record.move((right - style.GRID_CELL_SIZE,
+                           y0 - style.GRID_CELL_SIZE))
+        self._play.move((right - style.GRID_CELL_SIZE, y1))
+        # self._speak.move((right, y2))
         self._prev.move((left, y3))
         self._next.move((right, y3))
 

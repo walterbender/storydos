@@ -21,6 +21,9 @@ msgstr ""
 msgid "Story"
 msgstr "Relatar"
 
+msgid "Tell a Story"
+msgstr "Contar una Historia"
+
 #: StoryActivity.py:50
 msgid "Write your story here."
 msgstr "Escribe su historia aquí."
