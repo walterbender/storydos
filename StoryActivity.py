@@ -351,25 +351,30 @@ class StoryActivity(activity.Activity):
         self.array_button = radio_factory(
             'array', self.toolbar, self._array_cb,
             tooltip=_('View images all at once'), group=None)
+        self.array_button.hide()
 
         self._linear_button = radio_factory(
             'linear', self.toolbar, self._linear_cb,
             tooltip=_('View images one at a time'), group=self.array_button)
+        self._linear_button.hide()
 
         self.autoplay_button = button_factory(
             'media-playback-start', self.toolbar, self._do_autoplay_cb,
             tooltip=_('Play'))
         self.autoplay_button.set_sensitive(False)
+        self.autoplay_button.hide()
 
-        separator_factory(self.toolbar)
+        # separator_factory(self.toolbar)
 
         self.save_as_image = button_factory(
             'image-saveoff', self.toolbar, self._do_save_as_image_cb,
             tooltip=_('Save as image'))
+        self.save_as_image.hide()
 
         self.save_as_pdf = button_factory(
             'save-as-pdf', self.toolbar, self._do_save_as_pdf_cb,
             tooltip=_('Save as PDF'))
+        self.save_as_pdf.hide()
 
         separator_factory(toolbox.toolbar, True, False)
 
